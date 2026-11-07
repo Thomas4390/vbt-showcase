@@ -134,7 +134,7 @@ function drawChart(hover = null) {
   const X = (i) => CP.l + (i / (n - 1)) * (w - CP.l - CP.r);
   const Y = (v) => CP.t + (1 - Math.log(v / lo) / Math.log(hi / lo)) * (h - CP.t - CP.b);
   if (state.w >= 0) {
-    const a = meta.window_first_day[state.w], b = state.w + 1 < NW ? meta.window_first_day[state.w + 1] : n - 1;
+    const a = meta.window_first_day[state.w], b = meta.window_last_day[state.w];
     ctx.fillStyle = "rgba(239,243,248,0.07)";
     ctx.fillRect(X(a), CP.t, X(b) - X(a), h - CP.t - CP.b);
   }
