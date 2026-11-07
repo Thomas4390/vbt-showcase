@@ -38,7 +38,7 @@ const I18N = {
     m_spy: "Sharpe de SPY", m_days: "Jours de bourse", m_qsharpe: (w) => `Sharpe en ${w}`, m_qrank: (w) => `Rang en ${w}`,
     centile: (x) => `${x}e centile`, strategy: "Stratégie",
     stats: (s, f) => [
-      [`${s.distinct_winners}/${s.n_windows}`, "trimestres ont un gagnant différent"],
+      [`${s.winner_changes}/${s.n_windows - 1}`, `changements de gagnant d'un trimestre au suivant (${s.distinct_winners} gagnants distincts en ${s.n_windows} trimestres)`],
       [`${Math.round(s.rank_median)}e`, "centile médian du gagnant au trimestre suivant. Le hasard donne le 50e."],
       [f(ins.summary.walk_forward.sharpe), `Sharpe réel de « tenir le gagnant du trimestre précédent », contre ${f(ins.summary.oracle.sharpe)} pour l'oracle`],
       [`${f(s.grid_seconds)} s`, `pour calculer les ${s.n_backtests.toLocaleString("fr-FR")} backtests (médiane de 7 exécutions)`],
@@ -91,8 +91,8 @@ const I18N = {
     m_spy: "SPY Sharpe", m_days: "Trading days", m_qsharpe: (w) => `Sharpe in ${w}`, m_qrank: (w) => `Rank in ${w}`,
     centile: (x) => `${x}${ordinal(x)} percentile`, strategy: "Strategy",
     stats: (s, f) => [
-      [`${s.distinct_winners}/${s.n_windows}`, "quarters have a different winner"],
-      [`${Math.round(s.rank_median)}th`, "median percentile of the winner the next quarter. Chance gives the 50th."],
+      [`${s.winner_changes}/${s.n_windows - 1}`, `quarter-to-quarter changes of winner (${s.distinct_winners} distinct winners in ${s.n_windows} quarters)`],
+      [`${Math.round(s.rank_median)}${ordinal(Math.round(s.rank_median))}`, "median percentile of the winner the next quarter. Chance gives the 50th."],
       [f(ins.summary.walk_forward.sharpe), `real Sharpe of "hold last quarter's winner", against ${f(ins.summary.oracle.sharpe)} for the oracle`],
       [`${f(s.grid_seconds)} s`, `to compute the ${s.n_backtests.toLocaleString("en-US")} backtests (median of 7 runs)`],
     ],
