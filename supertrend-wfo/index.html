@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>9 797 backtests SuperTrend sur SPY | Synerqo</title>
+<meta name="description" content="Explorez chacun des 9 797 backtests SuperTrend sur SPY et voyez la meilleure combinaison changer à chaque trimestre.">
+<link rel="icon" href="logo.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="intro">
+    <div class="eyebrow mono">VectorBT PRO <b>/</b> SuperTrend <b>/</b> SPY 1 h</div>
+    <h1><span id="n-bt">9 797</span> backtests SuperTrend. <em>Explorez-les un par un.</em></h1>
+    <p class="lead">Chaque case de la carte est un backtest complet de 2019 à 2026. Choisissez un trimestre
+      pour voir quelle combinaison gagnait à ce moment, puis cliquez sur une case pour lire sa courbe.
+      La meilleure combinaison change presque à chaque trimestre.</p>
+  </header>
+
+  <section class="stats" id="stats" aria-label="Chiffres clés"></section>
+
+  <section class="explorer">
+    <div class="card map-card">
+      <div class="card-head">
+        <div>
+          <h2>Sharpe de chaque combinaison</h2>
+          <p class="sub" id="map-sub">Toute la période</p>
+        </div>
+        <div class="window-ctl">
+          <button type="button" id="prev" aria-label="Trimestre précédent">&#8249;</button>
+          <select id="window" aria-label="Période affichée"></select>
+          <button type="button" id="next" aria-label="Trimestre suivant">&#8250;</button>
+        </div>
+      </div>
+      <div class="map-wrap"><canvas id="map" aria-label="Carte de chaleur du Sharpe par période et multiplicateur"></canvas>
+        <div class="tip mono" id="map-tip" hidden></div></div>
+      <div class="legend">
+        <span class="mono" id="leg-lo"></span><span class="bar"></span><span class="mono" id="leg-hi"></span>
+        <span class="leg-name">Sharpe annualisé</span>
+        <span class="leg-best"><i></i>meilleure case de la vue</span>
+      </div>
+    </div>
+
+    <div class="card detail-card">
+      <div class="card-head">
+        <div>
+          <h2 class="mono" id="sel-name"></h2>
+          <p class="sub">Combinaison sélectionnée</p>
+        </div>
+      </div>
+      <dl class="metrics" id="metrics"></dl>
+      <div class="chart-wrap"><canvas id="chart" aria-label="Courbe d'équité de la combinaison sélectionnée"></canvas>
+        <div class="tip mono" id="chart-tip" hidden></div></div>
+      <div class="chart-legend"><span class="sw strat"></span>Stratégie
+        <span class="sw spy"></span>SPY acheté et conservé <span class="sw win"></span>Trimestre affiché</div>
+    </div>
+  </section>
+
+  <section class="method">
+    <h2>Méthode</h2>
+    <ul>
+      <li>Données SPY à la minute, heures de marché, regroupées en barres de 1 h, du 2 janvier 2019 au 13 février 2026.</li>
+      <li>SuperTrend du tutoriel « SuperFast SuperTrend » de VectorBT PRO, simulateur Numba sur mesure. Long seulement, frais de 0,5 point de base par ordre, ordre exécuté à la clôture de la barre suivant le signal.</li>
+      <li>Grille : période de 4 à 100 par pas de 1, multiplicateur de 1 à 6 par pas de 0,05. Soit 97 x 101 = 9 797 backtests continus.</li>
+      <li>Chaque trajectoire est ensuite découpée en 28 trimestres (de T1 2019 à T4 2025). Le Sharpe d'un trimestre est annualisé sur 252 jours.</li>
+      <li id="method-speed"></li>
+    </ul>
+    <p class="warn">Illustration pédagogique. Pas un conseil en placement. Pas un rendement de Synerqo.
+      Les performances passées ne préjugent pas des performances futures.</p>
+  </section>
+</main>
+<footer>
+  <a href="https://synerqo.com" rel="noopener"><img src="logo.svg" alt="Synerqo" height="26"></a>
+  <span>Thomas Vaudescal, Synerqo</span>
+</footer>
+<script src="app.js" type="module"></script>
+</body>
+</html>
