@@ -3,71 +3,99 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>9 797 backtests SuperTrend sur SPY | Synerqo</title>
-<meta name="description" content="Explorez chacun des 9 797 backtests SuperTrend sur SPY et voyez la meilleure combinaison changer à chaque trimestre.">
+<title>9 797 backtests SuperTrend | Synerqo</title>
+<meta name="description" content="9 797 backtests SuperTrend sur SPY. La meilleure combinaison change à chaque trimestre. 9,797 SuperTrend backtests on SPY. The best parameter set changes every quarter.">
 <link rel="icon" href="logo.svg">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<nav class="top">
+  <a class="brand" href="../" data-i18n="nav_all"></a>
+  <div class="lang" role="group" aria-label="Langue / Language">
+    <button type="button" data-lang="fr">FR</button><button type="button" data-lang="en">EN</button>
+  </div>
+</nav>
 <main>
   <header class="intro">
     <div class="eyebrow mono">VectorBT PRO <b>/</b> SuperTrend <b>/</b> SPY 1 h</div>
-    <h1><span id="n-bt">9 797</span> backtests SuperTrend. <em>Explorez-les un par un.</em></h1>
-    <p class="lead">Chaque case de la carte est un backtest complet de 2019 à 2026. Choisissez un trimestre
-      pour voir quelle combinaison gagnait à ce moment, puis cliquez sur une case pour lire sa courbe.
-      La meilleure combinaison change presque à chaque trimestre.</p>
+    <h1 data-i18n-html="h1"></h1>
+    <p class="lead" data-i18n="lead"></p>
   </header>
 
-  <section class="stats" id="stats" aria-label="Chiffres clés"></section>
+  <section class="stats" id="stats" aria-label="Key figures"></section>
 
-  <section class="explorer">
-    <div class="card map-card">
-      <div class="card-head">
-        <div>
-          <h2>Sharpe de chaque combinaison</h2>
-          <p class="sub" id="map-sub">Toute la période</p>
+  <!-- 1. Explorateur -->
+  <section class="block">
+    <div class="block-head"><span class="num mono">01</span><div><h2 data-i18n="s1_title"></h2><p data-i18n="s1_text"></p></div></div>
+    <div class="explorer">
+      <div class="card map-card">
+        <div class="card-head">
+          <div><h3 data-i18n="map_title"></h3><p class="sub" id="map-sub"></p></div>
+          <div class="window-ctl">
+            <button type="button" id="prev" data-i18n-aria="prev">&#8249;</button>
+            <select id="window" data-i18n-aria="window"></select>
+            <button type="button" id="next" data-i18n-aria="next">&#8250;</button>
+          </div>
         </div>
-        <div class="window-ctl">
-          <button type="button" id="prev" aria-label="Trimestre précédent">&#8249;</button>
-          <select id="window" aria-label="Période affichée"></select>
-          <button type="button" id="next" aria-label="Trimestre suivant">&#8250;</button>
+        <div class="map-wrap"><canvas id="map"></canvas><div class="tip mono" id="map-tip" hidden></div></div>
+        <div class="legend">
+          <span class="mono" id="leg-lo"></span><span class="bar"></span><span class="mono" id="leg-hi"></span>
+          <span class="leg-name" data-i18n="leg_sharpe"></span>
+          <span class="leg-best"><i></i><span data-i18n="leg_best"></span></span>
         </div>
       </div>
-      <div class="map-wrap"><canvas id="map" aria-label="Carte de chaleur du Sharpe par période et multiplicateur"></canvas>
-        <div class="tip mono" id="map-tip" hidden></div></div>
-      <div class="legend">
-        <span class="mono" id="leg-lo"></span><span class="bar"></span><span class="mono" id="leg-hi"></span>
-        <span class="leg-name">Sharpe annualisé</span>
-        <span class="leg-best"><i></i>meilleure case de la vue</span>
+      <div class="card detail-card">
+        <div class="card-head"><div><h3 class="mono" id="sel-name"></h3><p class="sub" data-i18n="selected"></p></div></div>
+        <dl class="metrics" id="metrics"></dl>
+        <div class="chart-wrap"><canvas id="chart"></canvas><div class="tip mono" id="chart-tip" hidden></div></div>
+        <div class="chart-legend"><span class="sw strat"></span><span data-i18n="lg_strategy"></span>
+          <span class="sw spy"></span><span data-i18n="lg_spy"></span><span class="sw win"></span><span data-i18n="lg_window"></span></div>
       </div>
     </div>
+  </section>
 
-    <div class="card detail-card">
-      <div class="card-head">
-        <div>
-          <h2 class="mono" id="sel-name"></h2>
-          <p class="sub">Combinaison sélectionnée</p>
-        </div>
-      </div>
-      <dl class="metrics" id="metrics"></dl>
-      <div class="chart-wrap"><canvas id="chart" aria-label="Courbe d'équité de la combinaison sélectionnée"></canvas>
-        <div class="tip mono" id="chart-tip" hidden></div></div>
-      <div class="chart-legend"><span class="sw strat"></span>Stratégie
-        <span class="sw spy"></span>SPY acheté et conservé <span class="sw win"></span>Trimestre affiché</div>
+  <!-- 2. Le gagnant ne tient pas -->
+  <section class="block">
+    <div class="block-head"><span class="num mono">02</span><div><h2 data-i18n="s2_title"></h2><p data-i18n="s2_text"></p></div></div>
+    <div class="grid2">
+      <div class="card"><h3 data-i18n="rank_title"></h3><p class="sub" data-i18n="rank_sub"></p>
+        <div class="chart-wrap"><canvas id="ranks"></canvas><div class="tip mono" id="ranks-tip" hidden></div></div></div>
+      <div class="card"><h3 data-i18n="path_title"></h3><p class="sub" data-i18n="path_sub"></p>
+        <div class="chart-wrap"><canvas id="path"></canvas><div class="tip mono" id="path-tip" hidden></div></div></div>
+    </div>
+    <div class="card table-card">
+      <h3 data-i18n="table_title"></h3>
+      <div class="table-scroll"><table id="winners"></table></div>
+    </div>
+  </section>
+
+  <!-- 3. Rejouer l'optimisation -->
+  <section class="block">
+    <div class="block-head"><span class="num mono">03</span><div><h2 data-i18n="s3_title"></h2><p data-i18n="s3_text"></p></div></div>
+    <div class="card">
+      <div class="chart-wrap"><canvas id="replay"></canvas><div class="tip mono" id="replay-tip" hidden></div></div>
+      <div class="table-scroll"><table id="replay-table" class="replay-table"></table></div>
+    </div>
+  </section>
+
+  <!-- 4. Robustesse -->
+  <section class="block">
+    <div class="block-head"><span class="num mono">04</span><div><h2 data-i18n="s4_title"></h2><p id="s4-text"></p></div></div>
+    <div class="grid2">
+      <div class="card"><h3 data-i18n="freq_title"></h3><p class="sub" data-i18n="freq_sub"></p>
+        <div class="map-wrap"><canvas id="freq"></canvas><div class="tip mono" id="freq-tip" hidden></div></div>
+        <div class="legend"><span class="mono">0 %</span><span class="bar seq"></span><span class="mono" id="freq-hi"></span></div></div>
+      <div class="card"><h3 data-i18n="disp_title"></h3><p class="sub" data-i18n="disp_sub"></p>
+        <div class="chart-wrap"><canvas id="disp"></canvas><div class="tip mono" id="disp-tip" hidden></div></div>
+        <div class="chart-legend"><span class="sw band"></span><span data-i18n="lg_band"></span>
+          <span class="sw med"></span><span data-i18n="lg_median"></span><span class="sw best"></span><span data-i18n="lg_max"></span></div></div>
     </div>
   </section>
 
   <section class="method">
-    <h2>Méthode</h2>
-    <ul>
-      <li>Données SPY à la minute, heures de marché, regroupées en barres de 1 h, du 2 janvier 2019 au 13 février 2026.</li>
-      <li>SuperTrend du tutoriel « SuperFast SuperTrend » de VectorBT PRO, simulateur Numba sur mesure. Long seulement, frais de 0,5 point de base par ordre, ordre exécuté à la clôture de la barre suivant le signal.</li>
-      <li>Grille : période de 4 à 100 par pas de 1, multiplicateur de 1 à 6 par pas de 0,05. Soit 97 x 101 = 9 797 backtests continus.</li>
-      <li>Chaque trajectoire est ensuite découpée en 28 trimestres (de T1 2019 à T4 2025). Le Sharpe d'un trimestre est annualisé sur 252 jours.</li>
-      <li id="method-speed"></li>
-    </ul>
-    <p class="warn">Illustration pédagogique. Pas un conseil en placement. Pas un rendement de Synerqo.
-      Les performances passées ne préjugent pas des performances futures.</p>
+    <h2 data-i18n="method_title"></h2>
+    <ul id="method"></ul>
+    <p class="warn" data-i18n="warn"></p>
   </section>
 </main>
 <footer>

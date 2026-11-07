@@ -1,9 +1,10 @@
 <!doctype html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>VectorBT PRO showcase | Synerqo</title>
+<style>[data-l]{display:none} html[lang=fr] [data-l=fr], html[lang=en] [data-l=en]{display:revert} .lang{position:absolute;top:22px;right:28px;display:inline-flex;border:1px solid oklch(0.295 0.007 250);border-radius:8px;overflow:hidden} .lang button{background:transparent;color:oklch(0.605 0.008 240);border:0;padding:6px 12px;font:500 13px "JetBrains Mono",monospace;cursor:pointer} .lang button[aria-pressed=true]{color:oklch(0.745 0.158 165);background:oklch(0.2 0.007 250)}</style>
 <meta name="description" content="Démonstrations de backtesting avec VectorBT PRO, à explorer soi-même.">
 <link rel="icon" href="logo.svg">
 <style>
@@ -29,18 +30,31 @@
 </style>
 </head>
 <body>
+<div class="lang" role="group" aria-label="Language"><button type="button" data-set="fr">FR</button><button type="button" data-set="en">EN</button></div>
 <main>
   <div class="eyebrow">VectorBT PRO showcase</div>
-  <h1>Des backtests réels, <em>à explorer soi-même.</em></h1>
-  <p>Chaque démonstration lance des milliers de backtests avec VectorBT PRO, puis publie chacun d'eux.
-    Vous pouvez vérifier chaque chiffre des posts LinkedIn de Thomas Vaudescal.</p>
+  <h1 data-l="fr">Des backtests réels, <em>à explorer soi-même.</em></h1>
+  <h1 data-l="en">Real backtests, <em>open to explore.</em></h1>
+  <p data-l="fr">Chaque démonstration lance des milliers de backtests avec VectorBT PRO, puis publie chacun d'eux. Vous pouvez vérifier chaque chiffre des posts LinkedIn de Thomas Vaudescal.</p>
+  <p data-l="en">Each demo runs thousands of backtests with VectorBT PRO, then publishes every one of them. You can check every figure in Thomas Vaudescal's LinkedIn posts.</p>
   <a class="card" href="supertrend-wfo/">
     <div class="n">01</div>
-    <h2>9 797 backtests SuperTrend sur SPY</h2>
-    <p>La meilleure combinaison de paramètres change à chaque trimestre. Choisissez un trimestre et une case pour le constater.</p>
+    <h2 data-l="fr">9 797 backtests SuperTrend sur SPY</h2>
+    <h2 data-l="en">9,797 SuperTrend backtests on SPY</h2>
+    <p data-l="fr">La meilleure combinaison de paramètres change à chaque trimestre. Choisissez un trimestre et une case pour le constater.</p>
+    <p data-l="en">The best parameter set changes every quarter. Pick a quarter and a cell to see it for yourself.</p>
   </a>
-  <p class="warn">Illustrations pédagogiques. Pas un conseil en placement. Pas un rendement de Synerqo.</p>
+  <p class="warn" data-l="fr">Illustrations pédagogiques. Pas un conseil en placement. Pas un rendement de Synerqo.</p>
+  <p class="warn" data-l="en">Educational illustrations. Not investment advice. Not a Synerqo return.</p>
 </main>
 <footer><a href="https://synerqo.com" rel="noopener"><img src="logo.svg" alt="Synerqo" height="26"></a></footer>
+<script>
+  const set = (l) => { document.documentElement.lang = l; localStorage.setItem("lang", l);
+    document.querySelectorAll(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.set === l)));
+    document.querySelectorAll("a.card").forEach((a) => (a.href = "supertrend-wfo/?lang=" + l)); };
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => set(b.dataset.set)));
+  const q = new URLSearchParams(location.search).get("lang");
+  set(q === "fr" || q === "en" ? q : localStorage.getItem("lang") || (navigator.language.startsWith("fr") ? "fr" : "en"));
+</script>
 </body>
 </html>
